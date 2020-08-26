@@ -1,0 +1,2 @@
+class DatabaseAccessBlocked(Exception):
+    pass
