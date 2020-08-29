@@ -14,6 +14,7 @@ python = "^3.6.1"
 [tool.poetry.dev-dependencies]
 tox = "^3.18.0"
 pre-commit = "^2.6.0"
+django-stubs = "^1.5.0"
 
 [tool.isort]
 lines_after_imports = 2
