@@ -24,6 +24,19 @@ jobs:
         ports:
           - 5432:5432
 
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: mysql
+          MYSQL_DATABASE: sansdb
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 3306:3306
+
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -42,3 +55,4 @@ jobs:
         run: tox
         env:
           POSTGRES_DB_URL: postgres://postgres:postgres@localhost/sansdb
+          MYSQL_DB_URL: mysql://root:mysql@127.0.0.1:3306/sansdb
