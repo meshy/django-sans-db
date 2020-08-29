@@ -10,3 +10,10 @@ SECRET_KEY = "only-for-tests"
 INSTALLED_APPS = [
     "tests",
 ]
+
+TEMPLATES = [
+    {
+        "BACKEND": "sans_db.template_backends.django_sans_db.DjangoTemplatesSansDB",
+        "APP_DIRS": True,
+    },
+]
