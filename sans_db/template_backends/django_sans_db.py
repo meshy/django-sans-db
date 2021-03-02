@@ -4,7 +4,7 @@ from django.http import HttpRequest
 from django.template import TemplateDoesNotExist
 from django.template.backends.django import DjangoTemplates, Template, reraise
 
-from sans_db.context_decorators import block_db
+from sans_db.context_managers import block_db
 
 
 class TemplateSansDB(Template):

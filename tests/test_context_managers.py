@@ -1,6 +1,6 @@
 import pytest
 
-from sans_db.context_decorators import block_db
+from sans_db.context_managers import block_db
 from sans_db.exceptions import DatabaseAccessBlocked
 
 from .models import ExampleModel
