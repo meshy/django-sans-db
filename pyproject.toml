@@ -38,7 +38,7 @@ classifiers = [
 Source = "https://github.com/meshy/django-sans-db"
 
 [tool.poetry.dependencies]
-python = "^3.6.1"
+python = ">=3.6.1,<3.11"
 
 [tool.poetry.dev-dependencies]
 tox = "^3.18.0"
