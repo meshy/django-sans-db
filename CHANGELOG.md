@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.1.0 [2021-12-17]
+
 - Initial release.
 - Tested with PostgreSQL, MySQL, and SQLite DB backends.
 - Tested with sensible combinations of:
