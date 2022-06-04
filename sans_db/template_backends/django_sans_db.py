@@ -1,4 +1,4 @@
-from typing import Dict, List, Union
+from typing import Dict
 
 from django.http import HttpRequest
 from django.template import TemplateDoesNotExist
