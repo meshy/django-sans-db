@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add support for configs with multiple databases.
 - Dropped Python 3.6 from test matrix.
 - Dropped Django 2.0 and 2.1 from test matrix.
 
