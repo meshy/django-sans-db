@@ -17,7 +17,6 @@ class TestBlockDB:
 
     @pytest.mark.parametrize("database", ["mysql", "postgres", "sqlite"])
     def test_evaluated_queryset_allowed(self, database: str) -> None:
-        ExampleModel.objects.using(database).create()
         queryset = list(ExampleModel.objects.using(database).all())
         with block_db():
             for model in queryset:
