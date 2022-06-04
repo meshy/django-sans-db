@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Dropped Python 3.6 from test matrix.
+- Dropped Django 2.0 and 2.1 from test matrix.
 
 ## v0.1.0 [2021-12-17]
 

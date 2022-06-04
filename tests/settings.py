@@ -4,7 +4,12 @@ from environs import Env
 env = Env()
 
 
-DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
+DATABASES = {
+    "default": {},
+    "mysql": env.dj_db_url("MYSQL_DATABASE_URL"),
+    "postgres": env.dj_db_url("POSTGRES_DATABASE_URL"),
+    "sqlite": env.dj_db_url("SQLITE_DATABASE_URL"),
+}
 SECRET_KEY = "only-for-tests"
 
 INSTALLED_APPS = [
