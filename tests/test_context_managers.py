@@ -6,17 +6,17 @@ from sans_db.exceptions import DatabaseAccessBlocked
 from .models import ExampleModel
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db(databases=["mysql", "postgres", "sqlite"])
 class TestBlockDB:
-    def test_queryset_evaluation_blocked(self) -> None:
-        database = "default"
+    @pytest.mark.parametrize("database", ["mysql", "postgres", "sqlite"])
+    def test_queryset_evaluation_blocked(self, database: str) -> None:
         queryset = ExampleModel.objects.using(database).all()
         with pytest.raises(DatabaseAccessBlocked):
             with block_db():
                 list(queryset)
 
-    def test_evaluated_queryset_allowed(self) -> None:
-        database = "default"
+    @pytest.mark.parametrize("database", ["mysql", "postgres", "sqlite"])
+    def test_evaluated_queryset_allowed(self, database: str) -> None:
         ExampleModel.objects.using(database).create()
         queryset = list(ExampleModel.objects.using(database).all())
         with block_db():
