@@ -9,14 +9,16 @@ from .models import ExampleModel
 @pytest.mark.django_db
 class TestBlockDB:
     def test_queryset_evaluation_blocked(self) -> None:
-        queryset = ExampleModel.objects.all()
+        database = "default"
+        queryset = ExampleModel.objects.using(database).all()
         with pytest.raises(DatabaseAccessBlocked):
             with block_db():
                 list(queryset)
 
     def test_evaluated_queryset_allowed(self) -> None:
-        ExampleModel.objects.create()
-        queryset = list(ExampleModel.objects.all())
+        database = "default"
+        ExampleModel.objects.using(database).create()
+        queryset = list(ExampleModel.objects.using(database).all())
         with block_db():
             for model in queryset:
                 pass

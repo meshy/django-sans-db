@@ -20,15 +20,17 @@ class TestDjangoTemplatesSansDB:
         assert isinstance(template, TemplateSansDB)
 
     def test_query_in_template_string(self) -> None:
-        context = {"items": ExampleModel.objects.all()}
+        database = "default"
+        context = {"items": ExampleModel.objects.using(database).all()}
         template = DJANGO_ENGINE.from_string(TEMPLATE_STRING)
 
         with pytest.raises(DatabaseAccessBlocked):
             template.render(context)
 
     def test_no_query_in_template_string(self) -> None:
-        obj = ExampleModel.objects.create()
-        context = {"items": list(ExampleModel.objects.all())}
+        database = "default"
+        obj = ExampleModel.objects.using(database).create()
+        context = {"items": list(ExampleModel.objects.using(database).all())}
         template = DJANGO_ENGINE.from_string(TEMPLATE_STRING)
 
         rendered = template.render(context)
@@ -41,16 +43,18 @@ class TestDjangoTemplatesSansDB:
         assert isinstance(template, TemplateSansDB)
 
     def test_query_in_template_file(self) -> None:
-        obj = ExampleModel.objects.create()
-        context = {"items": ExampleModel.objects.all()}
+        database = "default"
+        obj = ExampleModel.objects.using(database).create()
+        context = {"items": ExampleModel.objects.using(database).all()}
         template = DJANGO_ENGINE.get_template("django_template.html")
 
         with pytest.raises(DatabaseAccessBlocked):
             template.render(context)
 
     def test_no_query_in_template_file(self) -> None:
-        obj = ExampleModel.objects.create()
-        items = list(ExampleModel.objects.all())
+        database = "default"
+        obj = ExampleModel.objects.using(database).create()
+        items = list(ExampleModel.objects.using(database).all())
         context = {"items": items}
 
         template = DJANGO_ENGINE.get_template("django_template.html")
