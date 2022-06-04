@@ -1,5 +1,5 @@
 from contextlib import ExitStack, contextmanager
-from typing import Iterator
+from typing import Iterator, List, Optional
 
 from django.db import connections
 
@@ -11,8 +11,10 @@ def _blocker(*args: object) -> None:
 
 
 @contextmanager
-def block_db() -> Iterator[None]:
-    databases = list(connections)
+def block_db(*, databases: Optional[List[str]] = None) -> Iterator[None]:
+    if databases is None:
+        databases = list(connections)
+
     to_block = [connections[db_alias] for db_alias in databases]
     managers = [connection.execute_wrapper(_blocker) for connection in to_block]
 
