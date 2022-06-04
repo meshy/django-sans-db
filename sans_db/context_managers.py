@@ -6,14 +6,15 @@ from django.db import connections
 from .exceptions import DatabaseAccessBlocked
 
 
+def _blocker(*args: object) -> None:
+    raise DatabaseAccessBlocked
+
+
 @contextmanager
 def block_db() -> Iterator[None]:
-    def blocker(*args: object) -> None:
-        raise DatabaseAccessBlocked
-
     databases = list(connections)
     to_block = [connections[db_alias] for db_alias in databases]
-    managers = [connection.execute_wrapper(blocker) for connection in to_block]
+    managers = [connection.execute_wrapper(_blocker) for connection in to_block]
 
     with ExitStack() as stack:
         for manager in managers:
