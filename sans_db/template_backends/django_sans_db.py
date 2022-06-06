@@ -21,9 +21,11 @@ class DjangoTemplatesSansDB(DjangoTemplates):
     def from_string(self, template_code: str) -> TemplateSansDB:
         return TemplateSansDB(self.engine.from_string(template_code), self)
 
-    def get_template(self, template_name: str) -> TemplateSansDB:  # type: ignore[return]
+    def get_template(self, template_name: str) -> TemplateSansDB:
         try:
-            return TemplateSansDB(self.engine.get_template(template_name), self)
+            template = TemplateSansDB(self.engine.get_template(template_name), self)
         except TemplateDoesNotExist as exc:
-            # This line always throws an exception, by mypy doesn't know that.
+            # This line always throws an exception.
             reraise(exc, self)
+
+        return template
