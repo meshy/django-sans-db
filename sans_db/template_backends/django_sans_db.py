@@ -14,6 +14,10 @@ class TemplateSansDB(Template):
 
 
 class DjangoTemplatesSansDB(DjangoTemplates):
+    """
+    A template backend that ensures database queries are not made while rendering.
+    """
+
     def from_string(self, template_code: str) -> TemplateSansDB:
         return TemplateSansDB(self.engine.from_string(template_code), self)
 
