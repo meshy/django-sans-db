@@ -45,7 +45,6 @@ class TestDjangoTemplatesSansDB:
 
     @pytest.mark.parametrize("database", DATABASE_ALIASES)
     def test_query_in_template_file(self, database: str) -> None:
-        obj = ExampleModel.objects.using(database).create()
         context = {"items": ExampleModel.objects.using(database).all()}
         template = DJANGO_ENGINE.get_template("django_template.html")
 
