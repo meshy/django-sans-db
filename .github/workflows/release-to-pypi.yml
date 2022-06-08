@@ -24,6 +24,7 @@ jobs:
 
       - name: Build python package
         run: |
+          ./verify-version.sh
           poetry build
 
       - name: Upload to PyPI
