@@ -42,11 +42,8 @@ You can block access to the database when rendering Django templates with our cu
 
 Note: Currently, only Django templates are supported.
 
-You can block database access in all of your template renders
-by setting `DjangoTemplatesSansDB` as your default template renderer.
-To do so,
-make sure the `"BACKEND"` key of your `TEMPLATES` setting has the value
-`"sans_db.template_backends.django_sans_db.DjangoTemplatesSansDB"`.
+You can block database access in all of your templates
+by setting your templates backend to `"sans_db.template_backends.django_sans_db.DjangoTemplatesSansDB"`
 
 For example:
 
