@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-sans-db"
-version = "0.1.0"
+version = "1.0.0"
 description = "Tools to limit database access in parts of your Django codebase "
 authors = ["Charlie Denton <charlie@meshy.co.uk>"]
 license = "MIT"
