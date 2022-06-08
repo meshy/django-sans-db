@@ -2,7 +2,7 @@
 
 set -e
 
-tag=$(git describe --tags --abbrev=0)
+tag=$(git describe --tags --abbrev=0 --exact-match)
 version=$(poetry version --short)
 
 echo "Current git tag = ${tag}"
