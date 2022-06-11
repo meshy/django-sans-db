@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## [1.1.0] - 2022-06-11
+
 - Add `{% sansdb %}` template tag.
 
 ## [1.0.0] - 2022-06-08
