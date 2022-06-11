@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add `{% sansdb %}` template tag.
+
 ## [1.0.0] - 2022-06-08
 
 - Add support for configs with multiple databases.

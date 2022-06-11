@@ -8,6 +8,9 @@ Tools for limiting access to the database in parts of your Django code.
 pip install django-sans-db
 ```
 
+If you wish to use the `{% sansdb %}` template tag,
+you will need to add `"sans_db"` to your `INSTALLED_APPS`.
+
 ## Usage
 
 ### Context manager
@@ -63,3 +66,42 @@ Attempts to query the database will now cause a `sans_db.exceptions.DatabaseAcce
 
 Please refer to Django's docs on [support for template engines](https://docs.djangoproject.com/en/4.0/topics/templates/#support-for-template-engines)
 for details on how to set this up as a secondary template renderer.
+
+
+### Template tag
+
+You can block DB access in a portion of your template
+by wrapping it with the `{% sansdb %}` template tag.
+
+The template tag accepts database aliases as either strings, or variables.
+If passed as a variable, either strings or iterables of strings are accepted.
+If no aliases are passed, all databases will be blocked.
+
+Note: `DatabaseAccessBlocked` is raised when an attempt is made to access the DB.
+
+To block all databases:
+
+```django
+{% load sansdb %}
+{% sansdb %}
+    {# ... #}
+{% endsansdb %}
+```
+
+To block a list of databases named in the template:
+
+```django
+{% load sansdb %}
+{% sansdb "second_db" "third_db" %}
+    {# ... #}
+{% endsansdb %}
+```
+
+To block a list of databases from a context variable:
+
+```django
+{% load sansdb %}
+{% sansdb databases %}
+    {# ... #}
+{% endsansdb %}
+```

@@ -13,10 +13,15 @@ DATABASES = {
 SECRET_KEY = "only-for-tests"
 
 INSTALLED_APPS = [
+    "sans_db",
     "tests",
 ]
 
 TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "APP_DIRS": True,
+    },
     {
         "BACKEND": "sans_db.template_backends.django_sans_db.DjangoTemplatesSansDB",
         "APP_DIRS": True,
