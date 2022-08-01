@@ -39,7 +39,7 @@ python = ">=3.7.0,<3.11"
 
 [tool.poetry.dev-dependencies]
 tox = "^3.25.1"
-pre-commit = "^2.6.0"
+pre-commit = "^2.20.0"
 django-stubs = "^1.5.0"
 tox-poetry-dev-dependencies = "^0.0.9"
 
