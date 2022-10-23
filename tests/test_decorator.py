@@ -52,3 +52,54 @@ class TestBlockDBFunctionDecorator:
         not_blocked = DATABASE_ALIASES - {blocked}
         for db in not_blocked:
             func(db)
+
+
+@pytest.mark.django_db(databases=DATABASE_ALIASES)
+class TestBlockDBMethodDecorator:
+    """Tests for block_db when used as a method decorator."""
+
+    @pytest.mark.parametrize("database", DATABASE_ALIASES)
+    def test_queryset_evaluation_blocked(self, database: str) -> None:
+        queryset = ExampleModel.objects.using(database).all()
+
+        class MyClass:
+            @block_db()
+            def run(self) -> None:
+                list(queryset)
+
+        with pytest.raises(DatabaseAccessBlocked):
+            MyClass().run()
+
+    @pytest.mark.parametrize("database", DATABASE_ALIASES)
+    def test_evaluated_queryset_allowed(self, database: str) -> None:
+        queryset = list(ExampleModel.objects.using(database).all())
+
+        class MyClass:
+            @block_db()
+            def run(self) -> None:
+                list(queryset)
+
+        # No error raised, because query isn't on blocked DB.
+        MyClass().run()
+
+    @pytest.mark.parametrize("blocked", DATABASE_ALIASES)
+    def test_selective_blocking_blocked(self, blocked: str) -> None:
+        class MyClass:
+            @block_db(databases=[blocked])
+            def run(self) -> None:
+                ExampleModel.objects.using(blocked).create()
+
+        with pytest.raises(DatabaseAccessBlocked):
+            MyClass().run()
+
+    @pytest.mark.parametrize("blocked", DATABASE_ALIASES)
+    def test_selective_blocking_allowed(self, blocked: str) -> None:
+        class MyClass:
+            @block_db(databases=[blocked])
+            def run(self, db: str) -> None:
+                ExampleModel.objects.using(db).create()
+
+        # No error raised, because queries aren't on blocked DB.
+        not_blocked = DATABASE_ALIASES - {blocked}
+        for db in not_blocked:
+            MyClass().run(db)
