@@ -9,6 +9,8 @@ from .models import ExampleModel
 
 @pytest.mark.django_db(databases=DATABASE_ALIASES)
 class TestBlockDB:
+    """Tests for block_db when used as a context manager."""
+
     @pytest.mark.parametrize("database", DATABASE_ALIASES)
     def test_queryset_evaluation_blocked(self, database: str) -> None:
         queryset = ExampleModel.objects.using(database).all()
