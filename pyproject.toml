@@ -35,7 +35,7 @@ classifiers = [
 Source = "https://github.com/meshy/django-sans-db"
 
 [tool.poetry.dependencies]
-python = ">=3.7.0,<3.11"
+python = "^3.7"
 
 [tool.poetry.group.dev.dependencies]
 django-stubs = "^1.5.0"
