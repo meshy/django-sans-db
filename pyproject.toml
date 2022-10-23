@@ -43,7 +43,6 @@ django-stubs = "^1.5.0"
 mypy = "^0.982"
 pre-commit = "^2.6.0"
 tox = "^3.25.1"
-tox-poetry-dev-dependencies = "^0.0.9"
 
 [tool.isort]
 lines_after_imports = 2
