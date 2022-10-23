@@ -9,6 +9,8 @@ from .models import ExampleModel
 
 @pytest.mark.django_db(databases=DATABASE_ALIASES)
 class TestBlockDB:
+    """Tests for block_db when used as a context manager."""
+
     @pytest.mark.parametrize("database", DATABASE_ALIASES)
     def test_queryset_evaluation_blocked(self, database: str) -> None:
         queryset = ExampleModel.objects.using(database).all()
@@ -20,8 +22,7 @@ class TestBlockDB:
     def test_evaluated_queryset_allowed(self, database: str) -> None:
         queryset = list(ExampleModel.objects.using(database).all())
         with block_db():
-            for model in queryset:
-                pass
+            list(queryset)
 
     @pytest.mark.parametrize("blocked", DATABASE_ALIASES)
     def test_selective_blocking_blocked(self, blocked: str) -> None:

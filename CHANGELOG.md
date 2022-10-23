@@ -5,6 +5,8 @@
 - Remove upper limit on Python version.
   This should prevent issues when installing for new versions of Python.
 - Add Django 4.1 to text matrix.
+- Add tests for using `block_db` as a decorator.
+  This was working before, but not officially supported.
 
 ## [1.1.0] - 2022-06-11
 
