@@ -39,6 +39,24 @@ with block_db(databases=["replica"]):
     User.objects.using("replica").get()  # Raises DatabaseAccessBlocked
 ```
 
+
+### Decorator
+
+You can decorate functions and methods with `block_db` to block database access in them. Eg:
+
+```python
+from sans_db.context_managers import block_db
+
+class MyClass:
+    def allowed(self):
+        User.objects.create(...)  # Works outside of block_db()
+
+    @block_db()
+    def not_allowed(self):
+        User.objects.create(...)  # Raises DatabaseAccessBlocked
+```
+
+
 ### Template backend
 
 You can block access to the database when rendering Django templates with our custom template backend.
