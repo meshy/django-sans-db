@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## [1.2.0] - 2022-10-23
+
 - Remove upper limit on Python version.
   This should prevent issues when installing for new versions of Python.
 - Add Django 4.1 to text matrix.
