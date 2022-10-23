@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Remove upper limit on Python version.
+  This should prevent issues when installing for new versions of Python.
+- Add Django 4.1 to text matrix.
+
 ## [1.1.0] - 2022-06-11
 
 - Add `{% sansdb %}` template tag.

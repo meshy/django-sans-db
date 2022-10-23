@@ -17,6 +17,7 @@ classifiers = [
     "Framework :: Django :: 3.1",
     "Framework :: Django :: 3.2",
     "Framework :: Django :: 4.0",
+    "Framework :: Django :: 4.1",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
@@ -35,13 +36,13 @@ classifiers = [
 Source = "https://github.com/meshy/django-sans-db"
 
 [tool.poetry.dependencies]
-python = ">=3.7.0,<3.11"
+python = "^3.7"
 
-[tool.poetry.dev-dependencies]
-tox = "^3.25.1"
-pre-commit = "^2.6.0"
+[tool.poetry.group.dev.dependencies]
 django-stubs = "^1.5.0"
-tox-poetry-dev-dependencies = "^0.0.9"
+mypy = "^0.982"
+pre-commit = "^2.6.0"
+tox = "^3.25.1"
 
 [tool.isort]
 lines_after_imports = 2
