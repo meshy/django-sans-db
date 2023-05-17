@@ -52,8 +52,7 @@ jobs:
           pip install tox tox-gh-actions
 
       - name: Test with tox
-        run: tox --parallel
+        run: tox
         env:
           POSTGRES_DB_URL: postgres://postgres:postgres@localhost/sansdb
           MYSQL_DB_URL: mysql://root:mysql@127.0.0.1:3306/sansdb
-          TOX_PARALLEL_NO_SPINNER: 1
